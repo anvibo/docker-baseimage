@@ -5,9 +5,17 @@ services:
 
 stages:
   - build
-
+  - release
+  
+before_script:
+  - docker login -u anvibo -p $DOCKERHUB_PWD docker.io
+  
 build:
   stage: build
   script:
     - docker build --pull -t anvibo/baseimage .
 
+release:
+    stage: release
+    script:
+        - docker push anvibo/baseimage
