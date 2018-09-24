@@ -17,19 +17,14 @@ build-18.04:
     
     - docker push anvibo/baseimage:latest
     - docker push anvibo/baseimage:18.04
-  only:
-    - master
 
-        
 build-14.04:
   stage: build
   script:
     - docker build --pull -t anvibo/baseimage:14.04 -f Dockerfile-14.04 .
     
     - docker push anvibo/baseimage:14.04
-  only:
-    - master
-    
+
 build-14.04-with-tags:
   stage: build
   script:
