@@ -37,7 +37,7 @@ build-14.04-with-tags:
     
     - docker push anvibo/baseimage:14.04-$CI_COMMIT_TAG
   only:
-    - master
+    - tags
     
 build-18.04-with-tags:
   stage: build
@@ -46,4 +46,4 @@ build-18.04-with-tags:
     
     - docker push anvibo/baseimage:18.04-$CI_COMMIT_TAG
   only:
-    - master
+    - tags
