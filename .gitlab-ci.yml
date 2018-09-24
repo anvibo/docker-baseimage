@@ -13,6 +13,9 @@ build:
   stage: build
   script:
     - docker build --pull -t anvibo/baseimage .
+    - tocker tag anvibo/baseimage anvibo/baseimage:18.04
+    
     - docker push anvibo/baseimage:latest
+    - docker push anvibo/baseimage:18.04
 
         
