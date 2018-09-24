@@ -9,7 +9,7 @@ stages:
 before_script:
   - docker login -u anvibo -p $DOCKERHUB_PWD docker.io
   
-build:
+build-18.04:
   stage: build
   script:
     - docker build --pull -t anvibo/baseimage .
@@ -19,3 +19,9 @@ build:
     - docker push anvibo/baseimage:18.04
 
         
+build-14.04:
+  stage: build
+  script:
+    - docker build --pull -t anvibo/baseimage:14.04 -f Dockerfile-14.04 .
+    
+    - docker push anvibo/baseimage:14.04
