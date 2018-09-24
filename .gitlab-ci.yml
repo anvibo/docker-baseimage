@@ -18,4 +18,4 @@ build:
 release:
     stage: release
     script:
-        - docker push anvibo/baseimage
+        - docker push anvibo/baseimage:latest
