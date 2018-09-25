@@ -11,6 +11,7 @@ node {
 
 	withDockerRegistry([url: "", credentialsId: "dockerhub-anvibo"]) {
                 app.push("18.04-${env.BRANCH_NAME}")
+                app.push("18.04")
                 app.push("latest")
 
 	}
@@ -23,6 +24,7 @@ node {
 	withDockerRegistry([url: "", credentialsId: "dockerhub-anvibo"]) {
 	
 		app.push("14.04-${env.BRANCH_NAME}")
+		app.push("14.04")
 	}
     }
 }
