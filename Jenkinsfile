@@ -1,8 +1,5 @@
 node {
     def app
-parameters {
-gitParameter name: 'TAG', type: 'PT_TAG', defaultValue: ''
-}
 
     stage('Clone repository') {
         checkout scm
