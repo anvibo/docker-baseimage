@@ -9,7 +9,7 @@ node {
 
         app = docker.build("anvibo/baseimage", "-f 18.04/Dockerfile .")
 
-	docker.withRegistry('https://docker.io', 'dockerhub-anvibo') {
+	withDockerRegistry([url: "", credentialsId: "dockerhub-anvibo"]) {
 		app.push("18.04")
 	}
     }
