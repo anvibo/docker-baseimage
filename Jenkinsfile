@@ -4,7 +4,7 @@ node {
     stage('Clone repository') {
         checkout scm
 
-	echo "Commit: ${env}"
+sh 'printenv'
     }
 
     stage('Build image 18.04') {
