@@ -13,7 +13,7 @@ gitParameter name: 'TAG', type: 'PT_TAG', defaultValue: ''
         app = docker.build("anvibo/baseimage", "-f 18.04/Dockerfile .")
 
 	withDockerRegistry([url: "", credentialsId: "dockerhub-anvibo"]) {
-                app.push("18.04"${params.TAG})
+                app.push("18.04${params.TAG}")
                 app.push("latest")
 
 	}
@@ -25,7 +25,7 @@ gitParameter name: 'TAG', type: 'PT_TAG', defaultValue: ''
         
 	withDockerRegistry([url: "", credentialsId: "dockerhub-anvibo"]) {
 	
-		app.push("14.04"${params.TAG})
+		app.push("14.04${params.TAG}")
 	}
     }
 }
