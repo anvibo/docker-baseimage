@@ -11,6 +11,7 @@ node {
 
 	withDockerRegistry([url: "", credentialsId: "dockerhub-anvibo"]) {
 		app.push("18.04")
+		app.push("latest")
 	}
     }
 
