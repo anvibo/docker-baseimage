@@ -10,7 +10,7 @@ node {
         app = docker.build("anvibo/baseimage", "-f 18.04/Dockerfile .")
 
 	withDockerRegistry([url: "", credentialsId: "dockerhub-anvibo"]) {
-                app.push("18.04${env.BRANCH_NAME}")
+                app.push("18.04-${env.BRANCH_NAME}")
                 app.push("latest")
 
 	}
@@ -22,7 +22,7 @@ node {
         
 	withDockerRegistry([url: "", credentialsId: "dockerhub-anvibo"]) {
 	
-		app.push("14.04${env.BRANCH_NAME}")
+		app.push("14.04-${env.BRANCH_NAME}")
 	}
     }
 }
