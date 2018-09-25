@@ -7,7 +7,7 @@ node {
 
     stage('Build image 18.04') {
 
-        app = docker.build("docker-image", "-f 18.04/DOckerfile .")
+        app = docker.build("docker-image", "-f 18.04/Dockerfile .")
     }
 
 
