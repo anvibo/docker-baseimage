@@ -3,6 +3,8 @@ node {
 
     stage('Clone repository') {
         checkout scm
+
+	echo "Commit: ${env}"
     }
 
     stage('Build image 18.04') {
