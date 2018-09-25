@@ -5,9 +5,9 @@ node {
         checkout scm
     }
 
-    stage('Build image') {
+    stage('Build image 18.04') {
 
-        app = docker.build("anvibo/baseimage")
+        app = docker.build("docker-image", "18.04")
     }
 
 
@@ -16,10 +16,10 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://docker.io', 'dockerhub-anvibo') {
+       /* docker.withRegistry('https://docker.io', 'dockerhub-anvibo') { */
             /*	app.push("${env.BRANCH_NAME}-${env.BUILD_NUMBER}")*/
-            	app.push("${env.BRANCH_NAME}")
+/*            	app.push("${env.BRANCH_NAME}")
             
-       } 
+       } */
     }
 }
