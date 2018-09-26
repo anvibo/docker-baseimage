@@ -8,7 +8,7 @@ pipeline {
             }
         }
 
-        stage('Build image 18.04') {
+        stage('Build image 18.04 from master') {
             when { branch 'master' }
             steps {
                 script {
@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage('Build release image 18.04') {
+        stage('Build image 18.04 from branch') {
             when { not { branch 'master' } }
             steps {
                 script {
@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('Build image 14.04') {
+        stage('Build image 14.04 from image') {
             when { branch 'master' }
             steps {
                 script {
@@ -52,7 +52,7 @@ pipeline {
             }
         }
 
-        stage('Build release image 14.04') {
+        stage('Build image 14.04 from branch') {
             when { not { branch 'master' } }
             steps {
                 script {
