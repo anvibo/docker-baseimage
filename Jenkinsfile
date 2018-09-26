@@ -23,7 +23,7 @@ pipeline {
         }
 
         stage('Build release image 18.04') {
-            when { buildingTag() }
+            when { not { branch 'master' } }
             steps {
                 script {
                 app = docker.build("anvibo/baseimage", "-f 18.04/Dockerfile .")
@@ -53,7 +53,7 @@ pipeline {
         }
 
         stage('Build release image 14.04') {
-            when { buildingTag() }
+            when { not { branch 'master' } }
             steps {
                 script {
                 app = docker.build("anvibo/baseimage", "-f 14.04/Dockerfile .")
