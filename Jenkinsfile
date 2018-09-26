@@ -1,12 +1,14 @@
 pipeline {
     agent any
 
-stages {
+    stages {
 
-    stage('Clone repository') {
-        checkout scm
-    }
-/*
+        stage('Clone repository') {
+            steps {
+            checkout scm
+            }
+        }
+
     stage('Build image 18.04') {
         when { branch 'master' }
         steps {
@@ -32,6 +34,6 @@ stages {
 
 	        }
         }
-    } */
+    } 
 }
 }
