@@ -1,5 +1,19 @@
 pipeline {
     agent any
+    post {
+      failure {
+        updateGitlabCommitStatus name: 'build', state: 'failed'
+      }
+      success {
+        updateGitlabCommitStatus name: 'build', state: 'success'
+      }
+    }
+     options {
+      gitLabConnection('gitlab')
+    }
+    triggers {
+        gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: 'All')
+    }
     stages {
 
         stage('Clone repository') {
@@ -38,7 +52,7 @@ pipeline {
             }
         }
 
-        stage('Build image 14.04 from image') {
+        stage('Build image 14.04 from master') {
             when { branch 'master' }
             steps {
                 script {
