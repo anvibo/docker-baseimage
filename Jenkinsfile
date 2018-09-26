@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    def app
     stages {
 
         stage('Clone repository') {
@@ -12,12 +11,13 @@ pipeline {
     stage('Build image 18.04') {
         when { branch 'master' }
         steps {
-            app = docker.build("anvibo/baseimage", "-f 18.04/Dockerfile .")
+            script {
+                app = docker.build("anvibo/baseimage", "-f 18.04/Dockerfile .")
 
-            withDockerRegistry([url: "", credentialsId: "dockerhub-anvibo"]) {
-            app.push("18.04")
-            app.push("latest")
-
+                withDockerRegistry([url: "", credentialsId: "dockerhub-anvibo"]) {
+                app.push("18.04")
+                app.push("latest")
+                }
 	        }
         }
     }
