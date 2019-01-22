@@ -2,7 +2,7 @@
 ARGS="$*"
 NO_RECOMMENDS="--no-install-recommends"
 RECOMMENDS="--install-recommends"
-if [[ $ARGS =~ "$RECOMMENDS" ]]; then
+if [[ $ARGS == "$RECOMMENDS" ]]; then
     NO_RECOMMENDS=""
     ARGS=$(sed "s/$RECOMMENDS//g" <<<"$ARGS")
 fi
