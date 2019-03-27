@@ -7,9 +7,6 @@ jobs:
     steps:
       - checkout
       - run:
-        name: copy install-clean script to 18.04
-        command: cp install-clean 18.04
-      - run:
-        name: copy install-clean script to 14.04
-        command: cp install-clean 14.04
-      
+          name: Build Docker image
+          command: cp install-clean 18.04
+        
