@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: docker
     steps:
-      - checkout
-        path: ~/docker-baseimage
+      - checkout:
+          path: ~/docker-baseimage
       - run:
           name: copy install-clean script
           command: cp ../install-clean .
