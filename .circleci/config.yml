@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             IMAGE_TAG="18.04-r${CIRCLE_BUILD_NUM}"
             docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
             docker push $IMAGE_NAME:latest
@@ -55,8 +55,8 @@ jobs:
           - run:
               name: Publish Docker Image to Docker Hub
               command: |
-                docker login -u $DOCKER_USER -p $DOCKER_PASS
-                IMAGE_TAG="18.04-${CIRCLE_TAG/v/''}""
+                echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+                IMAGE_TAG="18.04-${CIRCLE_TAG/v/''}"
                 docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
                 docker push $IMAGE_NAME:latest
                 docker push $IMAGE_NAME:$IMAGE_TAG
