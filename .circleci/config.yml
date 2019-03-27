@@ -1,12 +1,15 @@
 version: 2
 jobs:
   build:
-    working_directory: /docker-baseimage
+    working_directory: /docker-baseimage/18.04
     docker:
       - image: docker
     steps:
       - checkout
       - run:
-          name: Build Docker image
-          command: cp install-clean 18.04
+          name: copy install-clean script
+          command: cp ../install-clean .
+      - run:
+          name: build docker image
+          command: docker build -t test:test .
         
