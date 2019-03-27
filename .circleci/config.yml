@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build_1804:
+  build:
     working_directory: ~/docker-baseimage/18.04
     docker:
       - image: docker
