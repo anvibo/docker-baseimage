@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build_1804:
     working_directory: ~/docker-baseimage/18.04
     docker:
       - image: docker
@@ -12,6 +12,7 @@ jobs:
           name: copy install-clean script
           command: cp ../install-clean .
       - run:
-          name: build docker image
-          command: docker build -t test:test .
+          name: build docker image with tag 18.04
+          command: |
+            docker build -t anvibo/baseimage:18.04 .
         
