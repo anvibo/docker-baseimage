@@ -51,16 +51,23 @@ spec:
                 withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
                   script {
                     dockerImage.push("18.04")
+                    sh "docker rmi $registry:18.04"
                   }
                 }
             }
       }
     }
-    stage('Remove Unused docker image') {
+    stage('Push release image 18.04') {
+      when { tag "v*" }
       steps{
         container('docker') {
-          sh "docker rmi $registry:18.04"
-        }
+                withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
+                  script {
+                    dockerImage.push("18.04-$TAG_NAME")
+                    sh "docker rmi $registry:18.04-$TAG_NAME"
+                  }
+                }
+            }
       }
     }
   }
