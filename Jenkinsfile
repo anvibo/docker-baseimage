@@ -63,8 +63,10 @@ spec:
         container('docker') {
                 withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
                   script {
+                    dockerImage.push("18.04")
                     dockerImage.push("18.04-$TAG_NAME")
                     sh "docker rmi $registry:18.04-$TAG_NAME"
+                    sh "docker rmi $registry:18.04"
                   }
                 }
             }
