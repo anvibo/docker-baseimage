@@ -1,0 +1,7 @@
+FROM anvibo/baseimage:18.04
+
+RUN export GCSFUSE_REPO=gcsfuse-bionic && \
+    install-clean curl gnupg ca-certificates && \
+    echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main"| tee /etc/apt/sources.list.d/gcsfuse.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    install-clean gcsfuse
