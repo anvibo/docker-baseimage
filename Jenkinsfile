@@ -32,7 +32,6 @@ spec:
     stage('Cloning Git') {
       steps {
         git 'https://github.com/anvibo/docker-baseimage.git'
-        tag = '18.04'
       }
     }
     stage("Building image $tag" ) {
@@ -40,13 +39,13 @@ spec:
         container('docker') {
                 withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
                   script {
-                    dockerImage = docker.build(registry + ":$tag" , "-f Dockerfile.$tag .")
+                    dockerImage = docker.build(registry + ":18.04" , "-f Dockerfile.18.04 .")
                   }
                 }
             }
       }
     }
-    stage("Push image 18.04 $tag") {
+    stage("Push image 18.04") {
       steps{
         container('docker') {
                 withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
@@ -60,7 +59,7 @@ spec:
     stage('Remove Unused docker image') {
       steps{
         container('docker') {
-          sh "docker rmi $registry:$BUILD_NUMBER"
+          sh "docker rmi $registry:18.04"
         }
       }
     }
