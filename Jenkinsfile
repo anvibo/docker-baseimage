@@ -34,7 +34,7 @@ spec:
         git 'https://github.com/anvibo/docker-baseimage.git'
       }
     }
-    stage("Building image $tag" ) {
+    stage('Building image 18.04' ) {
       steps{
         container('docker') {
                 withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
@@ -45,7 +45,7 @@ spec:
             }
       }
     }
-    stage("Push image 18.04") {
+    stage('Push image 18.04') {
       steps{
         container('docker') {
                 withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
