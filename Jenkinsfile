@@ -3,6 +3,7 @@ pipeline {
     registry = "anvibo/baseimage"
     registryCredential = 'dockerhub'
     dockerImage = ''
+    tag = ''
   }
 
   agent {
@@ -31,36 +32,37 @@ spec:
     stage('Cloning Git') {
       steps {
         git 'https://github.com/anvibo/docker-baseimage.git'
+        tag = '18.04'
       }
     }
-    stage('Building image') {
+    stage("Building image $tag" ) {
       steps{
         container('docker') {
                 withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
                   script {
-                    dockerImage = docker.build(registry + ":$BUILD_NUMBER", '-f Dockerfile.18.04 .')
+                    dockerImage = docker.build(registry + ":$tag" , "-f Dockerfile.$tag .")
                   }
                 }
             }
       }
     }
-    // stage('Push image') {
-    //   steps{
-    //     container('docker') {
-    //             withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
-    //               script {
-    //                 dockerImage.push()
-    //               }
-    //             }
-    //         }
-    //   }
-    // }
-    // stage('Remove Unused docker image') {
-    //   steps{
-    //     container('docker') {
-    //       sh "docker rmi $registry:$BUILD_NUMBER"
-    //     }
-    //   }
-    // }
+    stage("Push image 18.04 $tag") {
+      steps{
+        container('docker') {
+                withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
+                  script {
+                    dockerImage.push()
+                  }
+                }
+            }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        container('docker') {
+          sh "docker rmi $registry:$BUILD_NUMBER"
+        }
+      }
+    }
   }
 }
