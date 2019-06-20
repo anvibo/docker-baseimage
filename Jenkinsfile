@@ -72,5 +72,45 @@ spec:
             }
       }
     }
+
+    stage('Build image 18.04-gcsfuse' ) {
+      steps{
+        container('docker') {
+                withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
+                  script {
+                    dockerImage = docker.build(registry, "-f Dockerfile.18.04-gcsfuse .")
+                  }
+                }
+            }
+      }
+    }
+    stage('Push image 18.04-gcsfuse') {
+      steps{
+        container('docker') {
+                withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
+                  script {
+                    dockerImage.push("18.04-gcsfuse")
+                    sh "docker rmi $registry:18.04-gcsfuse"
+                  }
+                }
+            }
+      }
+    }
+    stage('Push release image 18.04-gcsfuse') {
+      when { tag "v*" }
+      steps{
+        container('docker') {
+                withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
+                  script {
+                    dockerImage.push("18.04-gcsfuse")
+                    dockerImage.push("18.04-gcsfuse-$TAG_NAME")
+                    sh "docker rmi $registry:18.04-gcsfuse-$TAG_NAME"
+                    sh "docker rmi $registry:18.04-gcsfuse"
+                  }
+                }
+            }
+      }
+    }
+
   }
 }
