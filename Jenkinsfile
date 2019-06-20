@@ -39,7 +39,7 @@ spec:
         container('docker') {
                 withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
                   script {
-                    dockerImage = docker.build(registry + ":18.04" , "-f Dockerfile.18.04 .")
+                    dockerImage = docker.build(registry, "-f Dockerfile.18.04 .")
                   }
                 }
             }
@@ -50,7 +50,7 @@ spec:
         container('docker') {
                 withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
                   script {
-                    dockerImage.push()
+                    dockerImage.push("18.04")
                   }
                 }
             }
