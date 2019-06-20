@@ -38,7 +38,7 @@ spec:
         container('docker') {
                 withDockerRegistry(registry: [credentialsId: 'dockerhub']) {
                   script {
-                    dockerImage = docker.build(registry + ":$BUILD_NUMBER", '18.04/')
+                    dockerImage = docker.build(registry + ":$BUILD_NUMBER", '-f Dockerfile.18.04 .')
                   }
                 }
             }
